@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Studio Tecnico Alessandro Cerquaglia" />
+  <title>assistenza e compravendita immobili - Studio Tecnico Alessandro Cerquaglia</title>
+  <style>
+    /* * * * BASE * * * */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #000; line-height: 1.6; }
+
+    /* * * * HEADER * * * */
+    header { background: linear-gradient(to right, #000, #222); color: #fff; display: flex; align-items: center; padding: 10px 20px; flex-wrap: wrap; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+    .logo img { height: 80px; }
+    nav { margin-left: auto; }
+    nav ul { list-style: none; display: flex; gap: 15px; }
+    nav a { text-decoration: none; color: #fff; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: background 0.3s; }
+    nav a:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* * * * HERO * * * */
+    .hero { background: linear-gradient(to right, #ffffff, #e6e6e6); text-align: center; padding: 60px 20px; border-bottom: 3px solid #ccc; }
+    .hero h1 { font-size: 2.5em; color: #000; margin-bottom: 15px; }
+    .hero p { font-size: 1.2em; color: #444; max-width: 800px; margin: 0 auto; text-align: justify; }
+
+    /* * * * SEZIONI BIANCHE CON LINEE DIVISORIE NERE * * * */
+    section {position: relative;padding: 50px 30px;max-width: 1000px;margin: 0 auto 30px auto;background: #fff;border-radius: 6px;box-shadow: 0 4px 20px rgba(0,0,0,0.1);border-bottom: 1px solid #000;}
+    section::before {content: '';position: absolute;top: 0;left: 20px;right: 20px;height: 2px;background: #000;}
+    section h2 {text-align: center;font-size: 28px;font-weight: bold;margin-bottom: 20px;color: #000;border-bottom: 1px dashed #000;padding-bottom: 8px;}
+    section p, section ul {text-align: justify;font-size: 16px;line-height: 1.8;color: #000;}
+    section ul {padding-left: 1.8rem;list-style-type: disc;}
+    section ul li {margin-bottom: 0.8rem;}
+    section + section { border-top: 1px solid #000; }
+
+    /* * * * BANNER FOTO (senza linea divisoria) * * * */
+    .banner-image {text-align: center;margin: 30px auto;max-width: 1000px;position: relative;}
+    .banner-image img {width: 70%;max-width: 900px;border-radius: 6px;border: 4px solid #000;box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+
+    /* * * * STILE BOTTONE "Per saperne di più" e "Per ricevere un preventivo" * * * */
+    .info-button {background-color: #287233;color: #fff;padding: 14px 28px;border-radius: 6px;font-weight: bold;text-decoration: none;transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;border: 1px solid #004080;display: inline-block;}
+    .info-button:hover {background-color: #fff;color: #287233;transform: scale(1.05);}
+
+    /* * * * FOOTER * * * */
+    footer { background-color: #111; color: #fff; font-size: 14px; margin-bottom: 0; }
+    .footer-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; flex-wrap: wrap; }
+    .social-container, .hours-container, .contact-container { flex: 1; min-width: 150px; }
+    .social-container { text-align: left; }
+    .hours-container { text-align: center; }
+    .contact-container { text-align: right; }
+    .contact-info p, .opening-hours p, .social-container p { margin: 4px 0; }
+    .social-title { margin-bottom: 20px; display: block; }
+    .social-icons { margin-top: 20px; }
+    .social-icons a img { width: 30px; height: 30px; margin: 0 5px; vertical-align: middle; }
+    .contact-info a[href^="mailto"] { color: #fff; text-decoration: none; }
+    .contact-info a[href^="mailto"]:hover { text-decoration: underline; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 10px 0; margin: 0; }
+
+    /* * * * DECORAZIONI * * * */
+    /* 1. Sezioni alternate a righe tratteggiate */
+    .section-pattern{background:repeating-linear-gradient(135deg,#fafafa 0,#fafafa 20px,#f0f0f0 20px,#f0f0f0 40px);}
+    /* 2. Divider a onda SVG */
+    .divider-wave{position:relative;height:60px;overflow:hidden}
+    .divider-wave::before{content:"";position:absolute;top:-20px;width:200%;height:100px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path fill="%23f4f4f4" d="M0,0 C600,100 600,0 1200,100 L1200,0 L0,0 Z"/></svg>') no-repeat;background-size:50% 100px;transform:translateX(-50%);}
+    /* 3. Maschera diagonale */
+    .diagonal-bg{position:relative;background:#fff}
+    .diagonal-bg::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:#e8e8e8;clip-path:polygon(0 0,100% 10%,100% 100%,0% 90%);z-index:-1;}
+    /* 4. Overlay puntinato */
+    .dotted-overlay{position:relative}
+    .dotted-overlay::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(#ddd 1px,transparent 1px);background-size:5px 5px;opacity:.2;pointer-events:none;}
+    /* 5. Hero con immagine da Unsplash + overlay */
+    .hero{position:relative;background:url('https://source.unsplash.com/1600x900/?architecture') center/cover no-repeat;color:#fff}
+    .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4)}
+    /* 6. Titoli con parte verde e nera */
+    .custom-title { text-align: center; font-size: 2.4em; margin-bottom: 30px; font-weight: 700; color: #000; line-height: 1.2;}
+    .custom-title .green-part { color: #287233;}
+  </style>
+</head>
+<body>
+
+  <header>
+  <div class="logo"><img src="img/logo.png" alt="Logo"></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+  </header>
+
+  <section class="banner-image">
+  <img src="img/assistenza.jpg" alt="Assistenza Compravendita Immobili" />
+  </section>
+
+  <section class="hero">
+  <div class="container">
+    <h1 class="custom-title"><span class="green-part">Assistenza</span> Compravendita Immobili</h1>
+  </div>
+  </section>
+
+  <section class="section-pattern">
+    <div class="container">
+      <h2 class="custom-title"><span class="green-part">Un supporto professionale per</span> vendere o acquistare casa</h2>
+      <p>
+        Acquistare o vendere un immobile è un passo importante, che richiede competenze tecniche e conoscenza normativa. Il nostro studio fornisce assistenza completa durante tutte le fasi della compravendita immobiliare, assicurando che l’operazione avvenga in modo sicuro, trasparente e senza imprevisti. Le attività che svolgiamo sono
+      </p>
+      <ul>
+        <li>Richiesta di accesso agli atti amministrativi presso Comune di appartenenza</li>
+        <li>Verifica della conformità urbanistica e catastale (visure, planimetrie, titoli abilitativi)</li>
+        <li>Consulenza in fase di rogito notarile</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider-wave"></div>
+
+  <section class="diagonal-bg">
+    <div class="container">
+    <h2 class="custom-title"><span class="green-part">Perché è fondamentale un’</span> assistenza tecnica qualificata?</h2>
+      <p>Affidarsi a un’assistenza tecnica qualificata rappresenta un valore aggiunto fondamentale nel processo di compravendita immobiliare. [...]</p>
+      <p>Questo approccio professionale fornisce certezze sia al venditore [...]</p>
+      <p>Infine, l’assistenza di un tecnico esperto consente di ottimizzare tempi e procedure [...]</p>
+    </div>
+  </section>
+
+  <div class="divider-wave"></div>
+
+  <section class="dotted-overlay section-pattern">
+    <div class="container">
+      <h2 class="custom-title"><span class="green-part">Cosa</span> offriamo</h2>
+      <ul>
+        <li>Sopralluogo e rilievo tecnico per verifica dello stato di fatto</li>
+        <li>Redazione e aggiornamento della documentazione urbanistica e catastale</li>
+        <li>APE (Attestato di Prestazione Energetica), planimetrie, visure e certificazioni</li>
+        <li>Relazione tecnica integrata per l’atto notarile</li>
+        <li>Assistenza continuativa fino al completamento dell’operazione</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider-wave"></div>
+
+  <section>
+    <div class="container">
+      <h2 class="custom-title"><span class="green-part">Perché affid</span>arsi a noi</h2>
+      <p>
+        Operiamo con metodo rigoroso e affiancando il cliente passo dopo passo. Dalla verifica iniziale fino alla stipula del rogito, offriamo soluzioni mirate per vendite tra privati, aziende, eredità e divisioni. Collaboriamo da anni con notai, agenzie immobiliari e istituti di credito per una gestione integrata della compravendita.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+  <div class="footer-wrapper">
+    <!-- SOCIAL -->
+    <div class="social-container">
+      <h4>Seguici Sui nostri Social</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/geometra.alessandro.cerquaglia"><img src="img/facebook.png" alt="Facebook"></a>
+        <a href="https://wa.me/+393393737444"><img src="img/whatsapp.png" alt="Whatsapp"></a>
+        <a href="https://www.instagram.com/cerquagliaalessandro?utm_source=ig_web_button_share_sheet&igsh=MWJwbDU1Nm80ZWFqMQ=="><img src="img/instagram.png" alt="Instagram"></a>
+      </div>
+      <p class="piva">P.IVA 02990980548</p>
+    </div>
+
+    <!-- ORARI -->
+    <div class="hours-container">
+      <h4>Orari di apertura</h4>
+      <div class="opening-hours">
+        <p>Lunedì – Venerdì: 9:00 – 13:00 / 15:00 – 19:00</p>
+        <p>Sabato e Domenica: Chiuso</p>
+      </div>
+      <p class="indirizzo">Sede: Via Piana 250/B, Pantalla di Todi (PG)</p>
+    </div>
+
+    <!-- CONTATTI -->
+    <div class="contact-container">
+      <h4>Contatti</h4>
+      <div class="contact-info">
+        <p>Tel: +39 075 465 8020</p>
+        <p>Cell: +39 339 373 7444</p>
+        <p>Email: <a href="mailto:info@studiocerquaglia.it">alessandro.cerquaglia@geometri.pg.it</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Studio Tecnico Alessandro Cerquaglia.</p>
+  </div>
+</footer>
+</body>
+</html>

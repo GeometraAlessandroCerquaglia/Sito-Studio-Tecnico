@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Studio Tecnico Alessandro Cerquaglia" />
+  <title>Rilievi - Studio Tecnico Alessandro Cerquaglia</title>
+  <style>
+    /* * * * BASE * * * */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #000; line-height: 1.6; }
+
+    /* * * * HEADER * * * */
+    header { background: linear-gradient(to right, #000, #222); color: #fff; display: flex; align-items: center; padding: 10px 20px; flex-wrap: wrap; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+    .logo img { height: 80px; }
+    nav { margin-left: auto; }
+    nav ul { list-style: none; display: flex; gap: 15px; }
+    nav a { text-decoration: none; color: #fff; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: background 0.3s; }
+    nav a:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* * * * HERO * * * */
+    .hero { background: linear-gradient(to right, #ffffff, #e6e6e6); text-align: center; padding: 60px 20px; border-bottom: 3px solid #ccc; }
+    .hero h1 { font-size: 2.5em; color: #000; margin-bottom: 15px; }
+    .hero p { font-size: 1.2em; color: #444; max-width: 800px; margin: 0 auto; text-align: justify; }
+
+    /* * * * SEZIONI BIANCHE CON LINEE DIVISORIE NERE * * * */
+    section {position: relative;padding: 50px 30px;max-width: 1000px;margin: 0 auto 30px auto;background: #fff;border-radius: 6px;box-shadow: 0 4px 20px rgba(0,0,0,0.1);border-bottom: 1px solid #000;}
+    section::before {content: '';position: absolute;top: 0;left: 20px;right: 20px;height: 2px;background: #000;}
+    section h2 {text-align: center;font-size: 28px;font-weight: bold;margin-bottom: 20px;color: #000;border-bottom: 1px dashed #000;padding-bottom: 8px;}
+    section p, section ul {text-align: justify;font-size: 16px;line-height: 1.8;color: #000;}
+    section ul {padding-left: 1.8rem;list-style-type: disc;}
+    section ul li {margin-bottom: 0.8rem;}
+    section + section { border-top: 1px solid #000; }
+
+    /* * * * BANNER FOTO (senza linea divisoria) * * * */
+    .banner-image {text-align: center;margin: 30px auto;max-width: 1000px;position: relative;}
+    .banner-image img {width: 70%;max-width: 900px;border-radius: 6px;border: 4px solid #000;box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+
+    /* * * * CONTENITORE GENERALE DELLA SEZIONE RILIEVI * * * */
+    .strumenti-rilievo {display: flex;flex-wrap: wrap;justify-content: center;gap: 30px;padding: 40px 20px;text-align: center;}
+    section h2 {font-size: 2rem;margin-bottom: 30px;color: #2a2a2a;}
+    .strumenti-container {display: flex;flex-wrap: wrap;justify-content: center;gap: 30px;}
+    .strumento-box {background-color: #f9f9f9;border-radius: 12px;box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);width: 300px;padding: 20px;display: flex;flex-direction: column;align-items: center;text-align: justify;}
+    .strumento-box h3 {font-size: 1.2rem;color: #287233 f;margin: 15px 0 10px;text-align: center;} 
+    .strumento-box img {width: 400px;height: 350px;object-fit: cover;border-radius: 8px;margin-bottom: 15px;}
+    .strumento-box p {font-size: 0.95rem;color: #333;margin-bottom: 8px;line-height: 1.5;text-align: justify;}
+
+    /* * * * FOOTER * * * */
+    footer { background-color: #111; color: #fff; font-size: 14px; margin-bottom: 0; }
+    .footer-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; flex-wrap: wrap; }
+    .social-container, .hours-container, .contact-container { flex: 1; min-width: 150px; }
+    .social-container { text-align: left; }
+    .hours-container { text-align: center; }
+    .contact-container { text-align: right; }
+    .contact-info p, .opening-hours p, .social-container p { margin: 4px 0; }
+    .social-title { margin-bottom: 20px; display: block; }
+    .social-icons { margin-top: 20px; }
+    .social-icons a img { width: 30px; height: 30px; margin: 0 5px; vertical-align: middle; }
+    .contact-info a[href^="mailto"] { color: #fff; text-decoration: none; }
+    .contact-info a[href^="mailto"]:hover { text-decoration: underline; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 10px 0; margin: 0; }
+
+    /* * * * DECORAZIONI * * * */
+    /* 1. Sezioni alternate a righe tratteggiate */
+    .section-pattern{background:repeating-linear-gradient(135deg,#fafafa 0,#fafafa 20px,#f0f0f0 20px,#f0f0f0 40px);}
+    /* 2. Divider a onda SVG */
+    .divider-wave{position:relative;height:60px;overflow:hidden}
+    .divider-wave::before{content:"";position:absolute;top:-20px;width:200%;height:100px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path fill="%23f4f4f4" d="M0,0 C600,100 600,0 1200,100 L1200,0 L0,0 Z"/></svg>') no-repeat;background-size:50% 100px;transform:translateX(-50%);}
+    /* 3. Maschera diagonale */
+    .diagonal-bg{position:relative;background:#fff}
+    .diagonal-bg::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:#e8e8e8;clip-path:polygon(0 0,100% 10%,100% 100%,0% 90%);z-index:-1;}
+    /* 4. Overlay puntinato */
+    .dotted-overlay{position:relative}
+    .dotted-overlay::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(#ddd 1px,transparent 1px);background-size:5px 5px;opacity:.2;pointer-events:none;}
+    /* 5. Hero con immagine da Unsplash + overlay */
+    .hero{position:relative;background:url('https://source.unsplash.com/1600x900/?architecture') center/cover no-repeat;color:#fff}
+    .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4)}
+    /* 6. Titoli con parte verde e nera */
+    .custom-title { text-align: center; font-size: 2.4em; margin-bottom: 30px; font-weight: 700; color: #000; line-height: 1.2;}
+    .custom-title .green-part { color: #287233;}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="img/logo.png" alt="Logo"></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="banner-image">
+  <img src="img/rilirvo.jpg" alt="Rilievo" />
+</section>
+
+<section class="hero">
+  <div class="container">
+    <h1 class="custom-title"><span class="green-part">Rili</span>evo</h1>
+  </div>
+</section>
+
+<div class="divider-wave"></div>
+
+<section class="section-pattern">
+  <div class="container">
+    <h2 class="custom-title"><span class="green-part">Tipologie d</span>i Rilievo</h2>
+    <p>Le diverse metodologie di rilievo tecnico permettono di acquisire dati precisi e dettagliati, fondamentali per la progettazione e la gestione del patrimonio edilizio. Di seguito un elenco delle principali tipologie di rilievo adottate.</p>
+    <ul>
+      <li>Rilievo topografico tradizionale</li>
+      <li>Rilievo con stazione totale</li>
+      <li>Rilievo GPS/GNSS</li>
+      <li>Rilievo laser scanner 3D</li>
+      <li>Rilievo fotogrammetrico con drone</li>
+      <li>Rilievo termografico</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider-wave"></div>
+
+<section class="diagonal-bg">
+  <div class="container">
+    <h2 class="custom-title"><span class="green-part">Che cos'è</span> un Rilievo</h2>
+    <p>Un rilievo è l’insieme delle operazioni tecniche volte a “misurare” e “rappresentare” la realtà fisica di un luogo, di un edificio o di una porzione di territorio. In termini pratici, consiste nella raccolta di dati spaziali – distanze, angoli, altezze, forme – per poi restituirli in formato grafico (planimetrie, sezioni, modelli 3D) o numerico (coordinate, quote).</p>
+    <p>Ecco i punti chiave di un rilievo, spiegati in modo semplice:</p>
+    <ul>
+      <li>Raccolta dati sul campo: con strumenti tradizionali (metro a nastro, livella), elettronici (stazione totale), satellitari (GPS/GNSS) o ottici (laser scanner, drone).</li>
+      <li>Elaborazione dei dati: importazione in software dedicati (CAD, BIM, fotogrammetria) per generare rappresentazioni 2D/3D accurate.</li>
+      <li>Restituzione finale: produzione di planimetrie, prospetti, modelli 3D, nuvole di punti o report tecnici, indispensabili per progettazioni e pratiche edilizie.</li>
+      <li>Applicazioni pratiche: progettazione architettonica e strutturale; monitoraggio di cedimenti e deformazioni; controllo cantieri; creazione di modelli digitali del terreno (DTM/DSM).</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider-wave"></div>
+
+<section class="dotted-overlay section-pattern">
+  <div class="container">
+    <h2 class="custom-title"><span class="green-part">Cosa</span> Offriamo</h2>
+    <div class="strumenti-container">
+
+    <!-- DISTO -->
+    <div class="strumento-box">
+    <img src="img/Disto.png" alt="Strumento Disto">
+    <h3>Disto Laser</h3>
+      <p><strong>Cos'è:</strong> Misuratore laser portatile ad alta precisione.</p>
+      <p><strong>Utilizzo:</strong> Permette di misurare distanze, superfici e volumi in modo rapido, anche da un solo operatore.</p>
+      <p>Risultato: Misure immediate e affidabili da utilizzare in pianta o nei calcoli metrici.</p>
+      <p><strong>Procedura:</strong> Si punta il raggio laser su una superficie e si legge il valore sul display, salvando o trasferendo i dati via Bluetooth o app.</p>
+    </div>
+
+    <!-- DRONE -->
+    <div class="strumento-box">
+    <img src="img/Drone.png" alt="Drone per rilievi">
+    <h3>Drone con Fotogrammetria</h3>
+      <p><strong>Cos'è:</strong> Velivolo radiocomandato dotato di fotocamera ad alta risoluzione.</p>
+      <p><strong>Utilizzo:</strong> Raccoglie foto aeree per generare modelli 3D, ortofoto e planimetrie dettagliate del terreno o fabbricato.</p>
+      <p><strong>Risultato:</strong> Nuvola di punti, ortomosaico, modello 3D, curve di livello.</p>
+      <p><strong>Procedura:</strong> Si pianifica il volo con software dedicato, si eseguono gli scatti fotogrammetrici, poi si elaborano i dati con software (es. 3DF Zephyr).</p>
+    </div>
+
+    <!-- TERMOCAMERA -->
+    <div class="strumento-box">
+    <img src="img/Termocamera.png" alt="Termocamera per rilievi">
+    <h3>Termocamera</h3>
+      <p><strong>Cos'è:</strong> Sensore a infrarossi che rileva la temperatura superficiale degli oggetti.</p>
+      <p><strong>Utilizzo:</strong> Individua dispersioni termiche, ponti termici, infiltrazioni e umidità.</p>
+      <p><strong>Risultato:</strong> Immagini termografiche con mappa termica a colori.</p>
+      <p><strong>Procedura:</strong> Si scattano immagini in ambienti controllati e si analizzano con software per interpretare le anomalie.</p>
+    </div>
+
+    <!-- LIDAR CELLULARE -->
+    <div class="strumento-box">
+    <img src="img/Lidar.png" alt="Lidar da cellulare">
+    <h3>Cellulare con Sensore LiDAR</h3>
+      <p><strong>Cos'è:</strong> Smartphone dotato di scanner LiDAR integrato per scansione tridimensionale.</p>
+      <p><strong>Utilizzo:</strong> Esegue scansioni rapide di interni o oggetti per generare modelli 3D.</p>
+      <p><strong>Risultato:</strong> Mesh 3D compatibili con software CAD/BIM.</p>
+      <p><strong>Procedura:</strong> Si effettua una scansione con app dedicata, poi si esporta il file per elaborazioni successive.</p>
+    </div>
+
+    <!-- FETTUCCIA -->
+    <div class="strumento-box">
+    <img src="img/Fettuccia.png" alt="Fettuccia">
+    <h3>Fettuccia Metrica</h3>
+      <p><strong>Cos'è:</strong> Nastro millimetrato utilizzato per misure lineari tradizionali.</p>
+      <p><strong>Utilizzo:</strong> Indispensabile per rilievi manuali, verifica di misure e controlli rapidi in cantiere.</p>
+      <p><strong>Risultato:</strong> Dati grezzi precisi per disegni bidimensionali o confronti sul posto.</p>
+      <p><strong>Procedura:</strong> Si stende la fettuccia tra due punti e si annotano manualmente le misure rilevate.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="custom-title"><span class="green-part">Perché Affid</span>arsi a Noi</h2>
+    <p>Abbiamo maturato una solida esperienza con interventi di riqualificazione sismica ed energetica su molti immobili del nostro territorio. Con interventi che vanno dalla semplice installazione di isolamento termico delle pareti, a ristrutturazioni pesanti ma anche demolizioni e ricostruzioni di fabbricati.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-wrapper">
+    <!-- SOCIAL -->
+    <div class="social-container">
+      <h4>Seguici Sui nostri Social</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/geometra.alessandro.cerquaglia"><img src="img/facebook.png" alt="Facebook"></a>
+        <a href="https://wa.me/+393393737444"><img src="img/whatsapp.png" alt="Whatsapp"></a>
+        <a href="https://www.instagram.com/cerquagliaalessandro?utm_source=ig_web_button_share_sheet&igsh=MWJwbDU1Nm80ZWFqMQ=="><img src="img/instagram.png" alt="Instagram"></a>
+      </div>
+      <p class="piva">P.IVA 02990980548</p>
+    </div>
+
+    <!-- ORARI -->
+    <div class="hours-container">
+      <h4>Orari di apertura</h4>
+      <div class="opening-hours">
+        <p>Lunedì – Venerdì: 9:00 – 13:00 / 15:00 – 19:00</p>
+        <p>Sabato e Domenica: Chiuso</p>
+      </div>
+      <p class="indirizzo">Sede: Via Piana 250/B, Pantalla di Todi (PG)</p>
+    </div>
+
+    <!-- CONTATTI -->
+    <div class="contact-container">
+      <h4>Contatti</h4>
+      <div class="contact-info">
+        <p>Tel: +39 075 465 8020</p>
+        <p>Cell: +39 339 373 7444</p>
+        <p>Email: <a href="mailto:info@studiocerquaglia.it">alessandro.cerquaglia@geometri.pg.it</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Studio Tecnico Alessandro Cerquaglia.</p>
+  </div>
+</footer>
+</body>
+</html>

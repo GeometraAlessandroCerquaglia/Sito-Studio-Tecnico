@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Studio Tecnico Alessandro Cerquaglia" />
+  <title>Blog - Studio Tecnico Alessandro Cerquaglia</title>
+   <style>
+    /* * * * BASE * * * */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #000; line-height: 1.6; }
+
+    /* * * * HEADER * * * */
+    header { background: linear-gradient(to right, #000, #222); color: #fff; display: flex; align-items: center; padding: 10px 20px; flex-wrap: wrap; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+    .logo img { height: 80px; }
+    nav { margin-left: auto; }
+    nav ul { list-style: none; display: flex; gap: 15px; }
+    nav a { text-decoration: none; color: #fff; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: background 0.3s; }
+    nav a:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* * * * HERO CON IMMAGINE + OVERLAY * * * */
+    .hero h1 { font-size: 2.5em; margin-bottom: 15px; }
+    .hero p { font-size: 1.2em; max-width: 1100px; margin: 25px auto; text-align: justify; padding: 0 30px; }
+    section h2 { text-align: center; margin-bottom: 20px; }
+    section img { display: block; margin: 0 auto 20px; max-width: 400px; height: auto; }
+    section p { text-align: justify; line-height: 2; margin-bottom: 1.5em; }
+    section ul { margin: 1.5em 0; padding-left: 1.5em; text-align: justify; line-height: 1.8; }
+    section ul li { margin-bottom: 1em; }
+
+    .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));align-items: start;gap:30px;padding:60px 20px;max-width:1200px;margin:auto;}
+    .blog-post{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.08);border:1px solid #ccc;display:flex;flex-direction:column;align-items: stretch;justify-content:space-between;margin-bottom:30px;max-width:350px;margin-left:auto;margin-right:auto;}
+    .blog-post img{width:100%;height:200px;object-fit:contain;background: #f0f0f0; display:block;margin:0 auto 15px auto;border-radius:10px 10px 0 0;}
+    .blog-post-content{padding:0 20px 20px 20px;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;}
+    .blog-post-content h2{font-size:1.4em;margin-bottom:10px;color:#111;text-align:center;}
+
+    .preview-text{flex-grow:1;font-size:1em;color:#555;line-height:1.5;text-align:justify;margin-bottom:20px;}
+    .read-more{align-self:center;background:#287233;color:#fff;padding:8px 20px;border-radius:6px;text-decoration:none;font-weight:600;transition:background-color 0.3s;cursor:pointer;}
+    .read-more:hover{background:#287233;}
+    .articolo-completo {display: none;}
+
+    /* * * * FOOTER * * * */
+    footer { background-color: #111; color: #fff; font-size: 14px; margin-bottom: 0; }
+    .footer-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; flex-wrap: wrap; }
+    .social-container, .hours-container, .contact-container { flex: 1; min-width: 150px; }
+    .social-container { text-align: left; }
+    .hours-container { text-align: center; }
+    .contact-container { text-align: right; }
+    .contact-info p, .opening-hours p, .social-container p { margin: 4px 0; }
+    .social-title { margin-bottom: 20px; display: block; }
+    .social-icons { margin-top: 20px; }
+    .social-icons a img { width: 30px; height: 30px; margin: 0 5px; vertical-align: middle; }
+    .contact-info a[href^="mailto"] { color: #fff; text-decoration: none; }
+    .contact-info a[href^="mailto"]:hover { text-decoration: underline; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 10px 0; margin: 0; }
+
+    /* * * * DECORAZIONI * * * */
+    /* 1. Sezioni alternate a righe tratteggiate */
+    .section-pattern{background:repeating-linear-gradient(135deg,#fafafa 0,#fafafa 20px,#f0f0f0 20px,#f0f0f0 40px);}
+    /* 2. Divider a onda SVG */
+    .divider-wave{position:relative;height:60px;overflow:hidden}
+    .divider-wave::before{content:"";position:absolute;top:-20px;width:200%;height:100px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path fill="%23f4f4f4" d="M0,0 C600,100 600,0 1200,100 L1200,0 L0,0 Z"/></svg>') no-repeat;background-size:50% 100px;transform:translateX(-50%);}
+    /* 3. Maschera diagonale */
+    .diagonal-bg{position:relative;background:#fff}
+    .diagonal-bg::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:#e8e8e8;clip-path:polygon(0 0,100% 10%,100% 100%,0% 90%);z-index:-1;}
+    /* 4. Overlay puntinato */
+    .dotted-overlay{position:relative}
+    .dotted-overlay::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(#ddd 1px,transparent 1px);background-size:5px 5px;opacity:.2;pointer-events:none;}
+    /* 5. Hero con immagine da Unsplash + overlay */
+    .hero{position:relative;background:url('https://source.unsplash.com/1600x900/?architecture') center/cover no-repeat;color:#fff}
+    .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4)}
+    /* 6. Titoli con parte verde e nera */
+    .custom-title { text-align: center; font-size: 2.4em; margin-bottom: 30px; font-weight: 700; color: #000; line-height: 1.2;}
+    .custom-title .green-part { color: #287233;}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="img/logo.png" alt="Logo"></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="section-pattern dotted-overlay">
+  <h2 class="custom-title">Notizie, Idee e Tendenze<span class="green-part"> dal Mondo della Progettazione</span></h2>
+  <img src="img/logo.jpg" alt="Logo Studio Tecnico Alessandro Cerquaglia">
+</section>
+
+<div class="divider-wave"></div>
+
+<section class="blog-grid diagonal-bg">
+  <div class="blog-post">
+    <img src="img/ARTCOLO1.jpg" alt="Titolo articolo 1">
+    <div class="blog-post-content testo-descrittivo">
+      <h2>Superbonus 110%</h2>
+      <p>Una panoramica chiara e aggiornata sulle novità relative ai bonus fiscali per l'edilizia previsti.</p>
+      <a href="https://www.agenziaentrate.gov.it/portale/superbonus-110-" class="read-more">Per Saperne di Più</a>
+    </div>
+  </div>
+
+  <div class="blog-post">
+    <img src="img/ARTICOLO2.jpg" alt="Titolo articolo 2">
+    <div class="blog-post-content">
+      <h2>Ricostruzione Post Sisma 2016</h2>
+      <p>Una sintesi chiara e aggiornata delle ultime novità riguardanti i bonus fiscali in ambito edilizio.</p>
+      <a href="https://www.agenziaentrate.gov.it/portale/ricostruzione-post-sisma-italia-centrale-e-superbonus-110%2525" class="read-more">Per Saperne di Più</a>
+    </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO3.jpg" alt="Differenza tra CILA e SCIA">
+  <div class="blog-post-content">
+    <h2>Differenza tra CILA e SCIA</h2>
+    <p>Hai deciso di ristrutturare casa, ma non sai quali permessi ti servono?</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo">
+      <h3>1. Cos’è la CILA?</h3>
+      <p>La CILA (Comunicazione Inizio Lavori Asseverata) è una pratica edilizia che consente l’avvio di interventi di manutenzione straordinaria, purché non impattino sugli elementi strutturali dell’edificio.</p>
+
+      <h3>2. Cos’è la SCIA?</h3>
+      <p>La SCIA (Segnalazione Certificata di Inizio Attività) è una procedura più articolata, necessaria per opere che possono coinvolgere la struttura portante o comportare modifiche rilevanti, come il cambio di destinazione d’uso.</p>
+
+      <h3>3. Quando serve una e quando l’altra?</h3>
+      <p>Si utilizza la <strong>CILA</strong> per interventi interni non strutturali, come lo spostamento di tramezzi o il rifacimento di impianti. È invece richiesta la <strong>SCIA</strong> per opere strutturali, frazionamenti, ampliamenti o modifiche sostanziali all’immobile.</p>
+
+      <h3>4. Perché affidarsi a un professionista?</h3>
+      <p>Un tecnico abilitato valuta correttamente la tipologia di intervento, predispone la documentazione necessaria e gestisce l’intero iter amministrativo, garantendo conformità normativa e sicurezza operativa.</p>
+
+      <h3>Conclusione</h3>
+      <p>Ogni intervento edilizio richiede competenze specifiche e aggiornate. Il nostro studio di progettazione offre un’assistenza completa, dalla presentazione della pratica più idonea fino alla conclusione dei lavori. Affidati a professionisti del settore per operare in serenità, con precisione e nel rispetto delle normative vigenti.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO4.jpg" alt="Perché chiamare un tecnico?">
+  <div class="blog-post-content">
+    <h2>Perché chiamare un tecnico?</h2>
+    <p>Hai deciso di rinnovare casa o progettare uno spazio da zero? Bene, ma… serve davvero un tecnico? Spoiler: sì.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo">
+      <h3>1. Fai pace con gli spazi?</h3>
+      <p>Hai una zona giorno che sembra troppo stretta o una cucina poco funzionale? Un geometra sa come ottimizzare ogni centimetro, progettando soluzioni pratiche e razionali senza stravolgere la struttura dell'immobile (a meno che non serva, e in quel caso saprà come intervenire nel modo corretto).</p>
+
+      <h3>2. Addio burocrazia</h3>
+      <p>Permessi, pratiche edilizie, certificazioni, variazioni catastali... la parte burocratica può diventare un labirinto. Un geometra la gestisce per te, garantendo che tutto sia in regola e riducendo tempi e rischi di sanzioni.</p>
+
+      <h3>3. Ogni dettaglio tecnico su misura</h3>
+      <p>Dal rilievo alla progettazione, ogni dettaglio è pensato sulle tue reali necessità. Un geometra trasforma le tue idee in soluzioni concrete, proponendo interventi pratici, sicuri e rispondenti alle normative vigenti.</p>
+
+      <h3>4. Più valore al tuo immobile</h3>
+      <p>Una ristrutturazione ben progettata non solo migliora la vivibilità, ma valorizza anche l’immobile sul mercato.</p>
+
+      <h3>Conclusione</h3>
+      <p>Il geometra non è un optional, ma un alleato affidabile che guida ogni fase con precisione tecnica, visione pratica e competenza normativa. Vuoi davvero trasformare la tua casa senza pensieri? Contatta lo Studio Tecnico Alessandro Cerquaglia.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO5.jpg" alt="Guida pratica alla presentazione delle pratiche edilizie">
+  <div class="blog-post-content">
+    <h2>Guida pratica alla presentazione delle pratiche edilizie</h2>
+    <p>Stai per avviare dei lavori e ti chiedi da dove iniziare con la burocrazia?</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo">
+      <h3>1. Quando è necessaria una pratica edilizia?</h3>
+      <p>Ogni intervento su un immobile, anche il più semplice, può richiedere una comunicazione o autorizzazione formale al Comune. Che si tratti di manutenzione straordinaria, modifiche interne o ampliamenti, è fondamentale verificare l’obbligatorietà di una pratica edilizia.</p>
+
+      <h3>2. Tipologie di pratiche edilizie</h3>
+      <p>Le principali sono: <strong>CILA</strong> (Comunicazione Inizio Lavori Asseverata), <strong>SCIA</strong> (Segnalazione Certificata di Inizio Attività), <strong>PdC</strong> (Permesso di Costruire) e, in alcuni casi, interventi in <strong>edilizia libera</strong>. Ognuna ha modalità e tempistiche differenti.</p>
+
+      <h3>3. Documentazione necessaria</h3>
+      <p>Ogni pratica richiede l’asseverazione di un tecnico abilitato, elaborati grafici, relazioni tecniche e moduli comunali. Spesso è anche necessario allegare dichiarazioni di conformità e visure catastali.</p>
+
+      <h3>4. Iter e tempi di approvazione</h3>
+      <p>La CILA e la SCIA sono efficaci con la presentazione (salvo verifica successiva del Comune), mentre il Permesso di Costruire prevede un’istruttoria più lunga. I tempi variano da pochi giorni a diverse settimane, in base alla complessità dell’intervento e alla normativa locale.</p>
+
+      <h3>5. Perché rivolgersi a un tecnico?</h3>
+      <p>Un professionista assicura la corretta classificazione dell’intervento, la compilazione completa della documentazione, la conformità normativa e il monitoraggio costante delle comunicazioni con l’ente pubblico. Questo riduce i rischi di sanzioni o ritardi nei lavori.</p>
+
+      <h3>Conclusione</h3>
+      <p>Presentare una pratica edilizia non è solo un adempimento burocratico, ma un passaggio strategico per realizzare i tuoi progetti nel rispetto delle normative. Il nostro studio tecnico ti affianca con competenza in ogni fase, dalla consulenza iniziale fino alla chiusura dell’intervento, con un approccio chiaro, sicuro e professionale.</p>
+    </div>
+  </div>
+  </div>
+ 
+  <div class="blog-post">
+  <img src="img/ARTICOLO6.jpg" alt="Certificato di Agibilità">
+  <div class="blog-post-content">
+    <h2>Quando serve il certificato di agibilità</h2>
+    <p>Hai appena concluso un intervento edilizio e ti stai chiedendo se serve il certificato di agibilità?</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cos’è il certificato di agibilità?</h3>
+      <p>Il certificato di agibilità è un documento ufficiale che attesta la conformità di un edificio ai requisiti di sicurezza, salubrità, risparmio energetico e rispetto delle norme urbanistiche e igienico-sanitarie.</p>
+
+      <h3>2. Quando è obbligatorio?</h3>
+      <p>Il certificato è obbligatorio al termine di lavori di nuova costruzione, ristrutturazione edilizia con modifiche sostanziali, cambi di destinazione d’uso e interventi che comportano alterazioni dell’immobile sotto il profilo della sicurezza o abitabilità.</p>
+
+      <h3>3. Quali controlli sono necessari?</h3>
+      <p>Prima del rilascio, l’edificio deve essere sottoposto a verifiche tecniche, inclusi i controlli su impianti elettrici, idraulici, antincendio e barriere architettoniche, per garantire che rispettino le normative vigenti.</p>
+
+      <h3>4. Chi rilascia il certificato?</h3>
+      <p>Il certificato di agibilità viene rilasciato dal Comune competente, su presentazione della documentazione tecnica firmata da un professionista abilitato, che attesta la conformità dell’immobile.</p>
+
+      <h3>Conclusione</h3>
+      <p>Il certificato di agibilità è fondamentale per garantire la sicurezza e la vivibilità degli edifici. Affidarsi a uno studio tecnico qualificato permette di gestire correttamente l’intero iter burocratico e di evitare sanzioni o problemi futuri.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO7.jpg" alt="Sanatoria edilizia">
+  <div class="blog-post-content">
+    <h2>Sanatoria edilizia: cos'è e quando richiederla</h2>
+    <p>Hai effettuato lavori senza le necessarie autorizzazioni edilizie? Scopri quando è possibile sanare la situazione.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cos’è la sanatoria edilizia?</h3>
+      <p>La sanatoria edilizia è una procedura amministrativa che consente di regolarizzare opere edilizie eseguite senza permesso o in difformità dalle autorizzazioni, a condizione che rispettino determinate condizioni di legge.</p>
+
+      <h3>2. Quando è possibile richiederla?</h3>
+      <p>La sanatoria può essere richiesta se l’opera è conforme alle norme urbanistiche e alle prescrizioni tecniche vigenti al momento della richiesta, e se non arreca danni a terzi o all’ambiente.</p>
+
+      <h3>3. Come si presenta la richiesta?</h3>
+      <p>La domanda di sanatoria si presenta al Comune tramite una specifica istanza corredata da documentazione tecnica asseverata da un professionista abilitato.</p>
+
+      <h3>4. Quali sono i rischi di non sanare?</h3>
+      <p>In assenza di sanatoria, le opere abusive possono essere soggette a demolizione o sanzioni amministrative e penali, con pesanti conseguenze legali.</p>
+
+      <h3>Conclusione</h3>
+      <p>La sanatoria edilizia è uno strumento importante per regolarizzare situazioni non conformi, ma deve essere valutata e gestita con l’assistenza di un tecnico qualificato per evitare complicazioni future.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO8.jpg" alt="Norme antisismiche e obblighi progettuali">
+  <div class="blog-post-content">
+    <h2>Norme antisismiche e obblighi progettuali</h2>
+    <p>Sei a conoscenza delle normative antisismiche e degli obblighi progettuali da rispettare per la sicurezza degli edifici?</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cosa sono le norme antisismiche?</h3>
+      <p>Le norme antisismiche sono disposizioni tecniche e legislative che regolano la progettazione, costruzione e manutenzione degli edifici per garantire la sicurezza strutturale in caso di eventi sismici.</p>
+
+      <h3>2. Quali sono gli obblighi progettuali?</h3>
+      <p>Ogni progetto edilizio deve rispettare specifici criteri di resistenza e sicurezza, inclusa l’adozione di materiali e tecniche costruttive che limitino il rischio di danni causati da terremoti.</p>
+
+      <h3>3. Chi è responsabile della conformità?</h3>
+      <p>Il tecnico abilitato (geometra, ingegnere, architetto) è responsabile di redigere un progetto conforme alle normative vigenti e di seguire le verifiche durante la realizzazione dell’opera.</p>
+
+      <h3>4. Perché è importante rispettare queste norme?</h3>
+      <p>La conformità alle norme antisismiche tutela la sicurezza degli occupanti, riduce il rischio di crolli e danni, e garantisce la validità delle assicurazioni e delle certificazioni edilizie.</p>
+
+      <h3>Conclusione</h3>
+      <p>Affidarsi a professionisti esperti e aggiornati sulle normative antisismiche è essenziale per realizzare edifici sicuri e conformi, tutelando la vita delle persone e il valore dell’immobile.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO9.jpg" alt="Rilievi con drone e fotogrammetria">
+  <div class="blog-post-content">
+    <h2>Rilievi con drone e fotogrammetria</h2>
+    <p>Vuoi conoscere le tecniche più avanzate per rilievi topografici e modellazione 3D?</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cos’è la fotogrammetria con drone?</h3>
+      <p>La fotogrammetria è una tecnica che utilizza immagini aeree acquisite da droni per ricostruire modelli tridimensionali del terreno o di costruzioni, con elevata precisione e rapidità.</p>
+
+      <h3>2. Vantaggi dei rilievi con drone</h3>
+      <p>I rilievi con drone consentono di accedere a zone difficili, ridurre i tempi di raccolta dati e aumentare la sicurezza operativa rispetto ai rilievi tradizionali manuali.</p>
+
+      <h3>3. Applicazioni pratiche</h3>
+      <p>Questa tecnologia è impiegata per rilievi topografici, monitoraggio di cantieri, gestione di aree agricole e forestali, controllo di infrastrutture e supporto alla progettazione.</p>
+
+      <h3>4. Software di elaborazione</h3>
+      <p>I dati raccolti vengono elaborati con software dedicati come 3DF Zephyr, che trasformano le immagini in modelli 3D, ortofoto e mappe di precisione.</p>
+
+      <h3>Conclusione</h3>
+      <p>Il nostro studio tecnico è specializzato in rilievi con drone e fotogrammetria, offrendo soluzioni precise e innovative per soddisfare ogni esigenza progettuale. Affidati a professionisti per ottenere risultati affidabili e tempestivi.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO10.jpg" alt="Confronto tra rilievo tradizionale e rilievo 3D">
+  <div class="blog-post-content">
+    <h2>Confronto tra rilievo tradizionale e rilievo 3D</h2>
+    <p>Vuoi capire quali sono le differenze e i vantaggi tra il rilievo manuale e quello tridimensionale?</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cos’è il rilievo tradizionale?</h3>
+      <p>Il rilievo tradizionale si basa su misurazioni manuali con strumenti come stazione totale, distanziometro e livelli. È un metodo consolidato ma può risultare lento e soggetto a errori umani.</p>
+
+      <h3>2. Cos’è il rilievo 3D?</h3>
+      <p>Il rilievo 3D utilizza tecnologie come laser scanner e fotogrammetria da drone per acquisire dati spaziali molto dettagliati, creando modelli tridimensionali precisi e facilmente analizzabili.</p>
+
+      <h3>3. Vantaggi del rilievo 3D</h3>
+      <p>Maggiore rapidità, precisione e completezza dei dati raccolti. Permette la documentazione digitale dell’area e facilita analisi e progettazioni future senza necessità di ulteriori sopralluoghi.</p>
+
+      <h3>4. Quando scegliere quale metodo?</h3>
+      <p>Il rilievo tradizionale è indicato per interventi semplici o in contesti dove le tecnologie avanzate non sono praticabili. Il rilievo 3D è preferibile per cantieri complessi, grandi superfici o situazioni che richiedono un elevato dettaglio.</p>
+
+      <h3>Conclusione</h3>
+      <p>Lo studio tecnico combina entrambe le metodologie, valutando caso per caso la soluzione più efficiente e accurata per garantire risultati di qualità e tempi ottimali di consegna.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO11.jpg" alt="Differenze tra visura e planimetria catastale ">
+  <div class="blog-post-content">
+    <h2>Differenze tra Visura e Planimetria Catastale </h2>
+    <p>Per comprendere il patrimonio immobiliare, è fondamentale conoscere gli strumenti catastali più comuni.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo">
+      <h3>1. Cos’è la Visura Catastale?</h3>
+      <p>La visura catastale è un documento informativo che riporta i dati identificativi e reddituali di un immobile, come particella, foglio, categoria e rendita catastale. È utile per verificare intestazioni e caratteristiche anagrafiche dell’immobile.</p>
+
+      <h3>2. Cos’è la Planimetria Catastale?</h3>
+      <p>La planimetria catastale è la rappresentazione grafica, in scala, della distribuzione degli ambienti interni di un’unità immobiliare. Essa descrive dettagliatamente la pianta dell’immobile, indicando muri, porte, finestre e altre caratteristiche fisiche.</p>
+
+      <h3>3. Differenze principali</h3>
+      <p>La visura è un documento descrittivo e testuale, mentre la planimetria è di natura grafica e rappresentativa. Entrambi sono essenziali ma servono a scopi diversi: la visura per informazioni amministrative, la planimetria per la progettazione e il rilievo tecnico.</p>
+
+      <h3>4. Quando richiederli?</h3>
+      <p>La visura è utile in fasi di compravendita, successioni o per verifica formale, mentre la planimetria è indispensabile per interventi edilizi, frazionamenti, o aggiornamenti catastali.</p>
+
+      <h3>Conclusione</h3>
+      <p>Per una corretta gestione immobiliare e tecnica è necessario utilizzare entrambi i documenti con la consapevolezza delle loro specificità. Il nostro studio tecnico è a disposizione per fornire assistenza professionale e consulenze personalizzate.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO12.jpg" alt="Come funziona un frazionamento catastale">
+  <div class="blog-post-content">
+    <h2>Come funziona un Frazionamento Catastale</h2>
+    <p>Il frazionamento catastale è un procedimento tecnico-amministrativo per suddividere un immobile in più unità distinte.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo">
+      <h3>1. Cos’è il Frazionamento Catastale?</h3>
+      <p>Il frazionamento consiste nella divisione di una particella catastale originaria in due o più nuove particelle, ognuna con propria identificazione catastale. Questa operazione è fondamentale per la vendita o la modifica dell’immobile.</p>
+
+      <h3>2. Quando è necessario?</h3>
+      <p>Il frazionamento è richiesto quando si vuole scindere una proprietà, realizzare unità immobiliari autonome o aggiornare la rappresentazione catastale dopo modifiche edilizie.</p>
+
+      <h3>3. Procedura tecnica</h3>
+      <p>Il geometra redige un elaborato planimetrico dettagliato con la nuova suddivisione, da presentare all’Agenzia delle Entrate – Catasto per l’aggiornamento degli archivi.</p>
+
+      <h3>4. Aspetti normativi e autorizzativi</h3>
+      <p>Prima di procedere al frazionamento è necessario verificare conformità urbanistica e ottenere eventuali permessi edilizi. Il processo deve rispettare le normative locali e nazionali vigenti.</p>
+
+      <h3>Conclusione</h3>
+      <p>Un frazionamento catastale ben eseguito garantisce sicurezza giuridica e facilita la gestione immobiliare. Affidarsi a professionisti qualificati assicura una corretta gestione dell’intero iter burocratico e tecnico.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO13.jpg" alt="Variazione catastale">
+  <div class="blog-post-content">
+    <h2>Variazione catastale: quando è obbligatoria</h2>
+    <p>Scopri in quali casi è necessario effettuare una variazione catastale per il tuo immobile.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cos’è la variazione catastale?</h3>
+      <p>La variazione catastale è una modifica ufficiale dei dati catastali di un immobile, che serve ad aggiornare la banca dati dell’Agenzia delle Entrate in caso di modifiche rilevanti.</p>
+
+      <h3>2. Quando è obbligatoria?</h3>
+      <p>È obbligatoria in presenza di interventi che alterano la consistenza, la destinazione d’uso o la rendita catastale, come ampliamenti, frazionamenti o cambi d’uso.</p>
+
+      <h3>3. Chi deve presentarla?</h3>
+      <p>La presentazione spetta al proprietario o al soggetto che ha effettuato i lavori, generalmente tramite un tecnico abilitato, che redige e invia la documentazione necessaria.</p>
+
+      <h3>4. Conseguenze del mancato aggiornamento</h3>
+      <p>Il mancato aggiornamento catastale può comportare sanzioni amministrative e problemi nella compravendita o nella richiesta di finanziamenti.</p>
+
+      <h3>Conclusione</h3>
+      <p>Per garantire la regolarità del proprio immobile e ottimizzare la gestione fiscale, è fondamentale affidarsi a professionisti esperti per la gestione delle variazioni catastali.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO14.jpg" alt="Fusione unità immobiliari">
+  <div class="blog-post-content">
+    <h2>Fusione di unità immobiliari: aspetti tecnici e fiscali</h2>
+    <p>Quando conviene unire più unità immobiliari e quali sono le implicazioni tecniche e fiscali.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cos’è la fusione di unità immobiliari?</h3>
+      <p>La fusione consiste nell’unione di due o più unità immobiliari in un’unica entità catastale, modificando la mappa catastale e la relativa documentazione.</p>
+
+      <h3>2. Aspetti tecnici</h3>
+      <p>Richiede rilievi tecnici precisi, una nuova planimetria e la presentazione di apposita pratica catastale tramite un tecnico abilitato.</p>
+
+      <h3>3. Aspetti fiscali</h3>
+      <p>La fusione può comportare variazioni nella rendita catastale e nei relativi tributi, con possibili vantaggi fiscali ma anche obblighi di aggiornamento.</p>
+
+      <h3>4. Quando conviene effettuare la fusione?</h3>
+      <p>È consigliata in caso di ristrutturazioni che unificano gli spazi o per semplificare la gestione catastale e patrimoniale dell’immobile.</p>
+
+      <h3>Conclusione</h3>
+      <p>Per una corretta gestione tecnica e fiscale della fusione, è essenziale rivolgersi a professionisti qualificati, in grado di seguire tutto l’iter burocratico e tecnico.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO15.jpg" alt="Guida all’Attestato di Prestazione Energetica (APE)">
+  <div class="blog-post-content">
+    <h2>Guida all’Attestato di Prestazione Energetica (APE)</h2>
+    <p>Scopri cos’è l’APE e perché è fondamentale per la compravendita e l’affitto degli immobili.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Cos’è l’Attestato di Prestazione Energetica?</h3>
+      <p>L’APE è un documento obbligatorio che certifica la classe energetica di un edificio, indicandone l’efficienza energetica attraverso specifici parametri e raccomandazioni.</p>
+
+      <h3>2. Quando è obbligatorio?</h3>
+      <p>L’APE è richiesto in caso di compravendita, locazione e nuove costruzioni, oltre che per interventi di riqualificazione energetica importanti.</p>
+
+      <h3>3. Come si ottiene?</h3>
+      <p>Un tecnico abilitato effettua un sopralluogo, raccoglie dati sull’immobile e utilizza software specifici per calcolare la prestazione energetica, quindi rilascia il certificato ufficiale.</p>
+
+      <h3>4. Validità e aggiornamenti</h3>
+      <p>L’APE ha una validità di 10 anni, salvo modifiche significative all’immobile che ne richiedano la revisione anticipata.</p>
+
+      <h3>Conclusione</h3>
+      <p>Il nostro studio tecnico fornisce consulenza completa per l’ottenimento dell’APE, garantendo conformità normativa e valorizzazione del tuo immobile.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO16.jpg" alt="Impianti fotovoltaici: aspetti tecnici e iter autorizzativi">
+  <div class="blog-post-content">
+    <h2>Impianti fotovoltaici: aspetti tecnici e iter autorizzativi</h2>
+    <p>Guida pratica per installare impianti fotovoltaici rispettando normativa e ottimizzando i benefici.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo" style="display:none;">
+      <h3>1. Aspetti tecnici principali</h3>
+      <p>Gli impianti fotovoltaici convertono l’energia solare in elettricità utilizzando pannelli solari, inverter e sistemi di accumulo. La progettazione deve considerare l’orientamento, l’inclinazione e la potenza dell’impianto.</p>
+
+      <h3>2. Iter autorizzativo</h3>
+      <p>L’installazione richiede permessi edilizi e autorizzazioni specifiche, a seconda della dimensione e della localizzazione dell’impianto, inclusa la comunicazione al Gestore dei Servizi Energetici (GSE).</p>
+
+      <h3>3. Incentivi e detrazioni</h3>
+      <p>Esistono diverse agevolazioni fiscali e incentivi statali per favorire l’adozione di impianti fotovoltaici, come il Superbonus 110% o detrazioni IRPEF.</p>
+
+      <h3>4. Manutenzione e durata</h3>
+      <p>Gli impianti fotovoltaici richiedono manutenzione periodica per garantire efficienza e durata nel tempo, con una vita media superiore a 25 anni.</p>
+
+      <h3>Conclusione</h3>
+      <p>Affidati a professionisti per la progettazione e gestione dell’intero iter autorizzativo e installativo, assicurando un investimento sicuro e redditizio.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO17.jpg" alt="Perizia tecnica estimativa">
+  <div class="blog-post-content">
+    <h2>Quando richiedere una perizia tecnica estimativa</h2>
+    <p>Hai bisogno di conoscere il valore reale di un immobile o dei danni subiti? La perizia estimativa è lo strumento giusto.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo">
+      <h3>1. Cos'è una perizia tecnica estimativa?</h3>
+      <p>È un documento redatto da un tecnico abilitato, che stima il valore economico di un immobile o di un danno, sulla base di criteri oggettivi e metodologie riconosciute.</p>
+
+      <h3>2. Quando è necessaria?</h3>
+      <p>Viene richiesta in diversi casi: compravendite immobiliari, divisioni ereditarie, separazioni coniugali, controversie legali, sinistri assicurativi, e accertamenti fiscali.</p>
+
+      <h3>3. Quali sono i vantaggi?</h3>
+      <p>Fornisce una valutazione imparziale, utile per tutelare le parti coinvolte, agevolare la risoluzione di controversie o supportare decisioni legali e patrimoniali.</p>
+
+      <h3>4. Chi può redigerla?</h3>
+      <p>Solo tecnici iscritti all’albo professionale (come geometri, ingegneri o architetti) abilitati e con comprovata esperienza nel settore estimativo.</p>
+
+      <h3>Conclusione</h3>
+      <p>Affidarsi a un tecnico qualificato per una perizia estimativa significa garantire rigore, trasparenza e valore legale al documento. Il nostro studio offre valutazioni precise e personalizzate per ogni esigenza.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="blog-post">
+  <img src="img/ARTICOLO18.jpg" alt="Consulenze geometra per cause civili">
+  <div class="blog-post-content">
+    <h2>Consulenze per cause civili: ruolo del geometra</h2>
+    <p>Il geometra ha un ruolo chiave nella risoluzione di contenziosi tecnici in ambito civile.</p>
+    <a href="javascript:void(0);" class="read-more" onclick="toggleArticolo(this)">Per Saperne di Più</a>
+    <div class="articolo-completo">
+      <h3>1. In quali cause è coinvolto?</h3>
+      <p>Contenziosi su confini, vizi edilizi, danni a fabbricati, infiltrazioni, servitù, stime patrimoniali e locazioni: sono tutte situazioni in cui l’intervento del geometra è determinante.</p>
+
+      <h3>2. In qualità di cosa interviene?</h3>
+      <p>Può essere nominato Consulente Tecnico di Parte (CTP) o, su incarico del giudice, Consulente Tecnico d’Ufficio (CTU).</p>
+
+      <h3>3. Qual è il valore aggiunto?</h3>
+      <p>Grazie alla sua preparazione tecnico-legale, il geometra fornisce relazioni oggettive, chiarisce aspetti tecnici e contribuisce alla formulazione di accordi conciliativi o sentenze eque.</p>
+
+      <h3>4. Quali sono i vantaggi per il cliente?</h3>
+      <p>Una consulenza tecnica ben redatta può fare la differenza nel contenzioso: tutela i diritti del cliente e accelera i tempi della causa.</p>
+
+      <h3>Conclusione</h3>
+      <p>Il nostro studio tecnico offre assistenza in ambito giudiziario con esperienza, imparzialità e massima competenza. Affidati a noi per una difesa tecnica solida e professionale.</p>
+    </div>
+  </div>
+  </div>
+</section>  
+
+<script>
+    function toggleArticolo(el) {
+      const container = el.closest('.blog-post');
+      const articolo = container.querySelector('.articolo-completo');
+      if (articolo.style.display === 'none' || articolo.style.display === '') {
+        articolo.style.display = 'block';
+        el.textContent = 'Chiudi';
+      } else {
+        articolo.style.display = 'none';
+        el.textContent = 'Per Saperne di Più';
+      }
+    }
+</script>
+
+<footer>
+  <div class="footer-wrapper">
+    <!-- SOCIAL -->
+    <div class="social-container">
+      <h4>Seguici Sui nostri Social</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/geometra.alessandro.cerquaglia"><img src="img/facebook.png" alt="Facebook"></a>
+        <a href="https://wa.me/+393393737444"><img src="img/whatsapp.png" alt="Whatsapp"></a>
+        <a href="https://www.instagram.com/cerquagliaalessandro?utm_source=ig_web_button_share_sheet&igsh=MWJwbDU1Nm80ZWFqMQ=="><img src="img/instagram.png" alt="Instagram"></a>
+      </div>
+      <p class="piva">P.IVA 02990980548</p>
+    </div>
+
+    <!-- ORARI -->
+    <div class="hours-container">
+      <h4>Orari di apertura</h4>
+      <div class="opening-hours">
+        <p>Lunedì – Venerdì: 9:00 – 13:00 / 15:00 – 19:00</p>
+        <p>Sabato e Domenica: Chiuso</p>
+      </div>
+      <p class="indirizzo">Sede: Via Piana 250/B, Pantalla di Todi (PG)</p>
+    </div>
+
+    <!-- CONTATTI -->
+    <div class="contact-container">
+      <h4>Contatti</h4>
+      <div class="contact-info">
+        <p>Tel: +39 075 465 8020</p>
+        <p>Cell: +39 339 373 7444</p>
+        <p>Email: <a href="mailto:info@studiocerquaglia.it">alessandro.cerquaglia@geometri.pg.it</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Studio Tecnico Alessandro Cerquaglia.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy & Cookie Policy</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; line-height:1.6; background:#f4f4f4; color:#333; }
+.container { max-width:1000px; margin:auto; padding:40px 20px; background:#fff; }
+h1,h2 { color:#287233; }
+a { color:#287233; text-decoration:underline; }
+ul { padding-left:20px; }
+.cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top:1px solid #ccc; padding:15px; text-align:center; font-size:14px; z-index:9999; display:none; }
+.cookie-banner p { margin:0 0 10px; }
+.cookie-buttons { display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; }
+.cookie-buttons button { padding:8px 16px; border:none; cursor:pointer; font-size:14px; }
+#accept-cookies { background:#287233; color:#fff; }
+#decline-cookies { background:#555; color:#fff; }
+.cookie-buttons a { color:#287233; text-decoration:underline; font-size:14px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Privacy & Cookie Policy</h1>
+
+  <h2>1. Titolare del Trattamento</h2>
+  <p>Il Titolare del trattamento dei dati personali è lo Studio Tecnico Alessandro Cerquaglia:</p>
+  <ul>
+    <li><strong>Nome e Cognome:</strong> Alessandro Cerquaglia</li>
+    <li><strong>Codice Fiscale:</strong> CRQLSN83R09E975E</li>
+    <li><strong>Data e luogo di nascita:</strong> 09/10/1983, Marsciano</li>
+    <li><strong>Residenza:</strong> Voc. Cerro n.217, 06055 Marsciano (PG)</li>
+    <li><strong>PEC:</strong> alessandro.cerquaglia@geopec.it</li>
+    <li><strong>Email:</strong> alessandro.cerquaglia@geometri.pg.it</li>
+    <li><strong>Sede operativa:</strong> Via Piana 250/B, Pantalla, Todi (PG)</li>
+    <li><strong>Partita IVA:</strong> 02990980548</li>
+    <li><strong>Telefono:</strong> 0754658020</li>
+    <li><strong>Cellulare:</strong> 3393737444</li>
+  </ul>
+
+  <h2>2. Dati raccolti</h2>
+  <p>Tramite il modulo “Richiedi una consulenza” vengono raccolti:</p>
+  <ul>
+    <li>Nome e Cognome</li>
+    <li>Email</li>
+    <li>Numero di cellulare</li>
+  </ul>
+
+  <h2>3. Finalità del trattamento</h2>
+  <ul>
+    <li>Rispondere alle richieste di contatto e consulenza;</li>
+    <li>Invio di comunicazioni solo se richieste;</li>
+    <li>Adempimenti di obblighi di legge e fiscali.</li>
+  </ul>
+
+  <h2>4. Modalità del trattamento</h2>
+  <p>I dati sono trattati con strumenti informatici e cartacei, nel rispetto della normativa GDPR. Non saranno diffusi e saranno conservati solo per il tempo necessario.</p>
+
+  <h2>5. Diritti dell’interessato</h2>
+  <p>L’utente può:</p>
+  <ul>
+    <li>Accedere, rettificare o cancellare i dati;</li>
+    <li>Opporsi al trattamento o richiedere limitazioni;</li>
+    <li>Richiedere la portabilità dei dati;</li>
+    <li>Revocare il consenso;</li>
+    <li>Proporre reclamo al Garante privacy.</li>
+  </ul>
+
+  <h2>6. Utilizzo di Google Maps</h2>
+  <p>La mappa interattiva può comportare cookie di Google. Per dettagli: <a href="https://policies.google.com/privacy?hl=it" target="_blank">Google Privacy</a></p>
+
+  <h2 id="cookie-policy">7. Cookie Policy</h2>
+  <p>Questo sito utilizza cookie tecnici e, previo consenso, cookie di terze parti (es. Google Maps). È possibile modificare le preferenze in qualsiasi momento tramite il banner o le impostazioni del browser.</p>
+</div>
+
+<!-- Banner Cookie -->
+<div id="cookie-banner" class="cookie-banner">
+  <p>Questo sito utilizza cookie tecnici e, previo consenso, cookie di terze parti (es. Google Maps). Vuoi accettarli?</p>
+  <div class="cookie-buttons">
+    <button id="accept-cookies">Accetta</button>
+    <button id="decline-cookies">Rifiuta</button>
+    <a href="#cookie-policy">Maggiori info</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  const banner = document.getElementById('cookie-banner');
+  const acceptBtn = document.getElementById('accept-cookies');
+  const declineBtn = document.getElementById('decline-cookies');
+  const consent = localStorage.getItem('cookieConsent');
+  if(!consent){ banner.style.display='block'; }
+  acceptBtn.addEventListener('click', () => { localStorage.setItem('cookieConsent','accepted'); banner.style.display='none'; });
+  declineBtn.addEventListener('click', () => { localStorage.setItem('cookieConsent','declined'); banner.style.display='none'; });
+})();
+</script>
+
+</body>
+</html>

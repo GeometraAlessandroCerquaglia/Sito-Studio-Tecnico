@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Studio Tecnico Alessandro Cerquaglia" />
+  <title>Chi Siamo - Studio Tecnico Alessandro Cerquaglia</title>
+   <style>
+    /* * * * BASE * * * */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #000; line-height: 1.6; }
+
+    /* * * * HEADER * * * */
+    header { background: linear-gradient(to right, #000, #222); color: #fff; display: flex; align-items: center; padding: 10px 20px; flex-wrap: wrap; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+    .logo img { height: 80px; }
+    nav { margin-left: auto; }
+    nav ul { list-style: none; display: flex; gap: 15px; }
+    nav a { text-decoration: none; color: #fff; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: background 0.3s; }
+    nav a:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* * * * HERO * * * */
+    .hero { background: linear-gradient(to right, #fff, #e8e8e8); text-align: center; padding: 60px 20px; border-bottom: 3px solid #ccc; }
+    .hero h1 { font-size: 2.5em; color: #000; margin-bottom: 15px; }
+    .hero p { font-size: 1.2em; color: #444; max-width: 800px; margin: 0 auto; text-align: justify; }
+    .section-pattern { background: repeating-linear-gradient(135deg,#fafafa 0,#fafafa 20px,#f0f0f0 20px,#f0f0f0 40px); padding: 60px 20px; }
+    .section-pattern h2 { text-align: center; font-size: 2.2em; margin-bottom: 30px; color: #111; }
+    .section-pattern img { display: block; margin: 20px auto; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+    .section-pattern p, .section-pattern ul { max-width: 1000px; margin: 15px auto; text-align: justify; font-size: 1em; color: #333; }
+    .section-pattern ul { padding-left: 25px; list-style-type: disc; }
+    .section-pattern ul li { margin-bottom: 8px; }
+
+    /* Titoli con parte verde e nera */
+    .custom-title { text-align: center; font-size: 2.4em; margin-bottom: 30px; font-weight: 700; color: #000; line-height: 1.2;}
+    .custom-title .green-part { color: #287233;}
+
+    /* Immagini centrate e ridotte al 50% */
+    .reduced-by-50 { width:60%;height: auto;display: block;margin: 0 auto 20px auto; }
+    
+    /* Sezione con sfondo rigato */
+    .section-pattern { background: repeating-linear-gradient( 135deg,  #fafafa 0,#fafafa 20px,#f0f0f0 20px,#f0f0f0 40px);padding: 60px 0;}
+    
+    /* ======= sezione Team: layout a piramide ======= */
+    .team-container{display:grid;grid-template-columns:repeat(3,280px);grid-auto-rows:auto;justify-content:center;row-gap:30px;column-gap:30px}
+    .team-container .team-member:nth-child(1){grid-column:2/3;grid-row:1/2}
+    .team-container .team-member:nth-child(2){grid-column:1/2;grid-row:2/3}
+    .team-container .team-member:nth-child(3){grid-column:3/4;grid-row:2/3}
+    .team-member{width:280px;background:white;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);padding:20px;text-align:center}
+    .team-member img{width:100%;height:280px;object-fit:cover;border-radius:10px}
+    .team-member h3{margin-top:10px}
+    .team-member ul{text-align:left;padding-left:20px;font-size:14px;color:#666}
+
+    /* * * * FOOTER * * * */
+    footer { background-color: #111; color: #fff; font-size: 14px; margin-bottom: 0; }
+    .footer-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; flex-wrap: wrap; }
+    .social-container, .hours-container, .contact-container { flex: 1; min-width: 150px; }
+    .social-container { text-align: left; }
+    .hours-container { text-align: center; }
+    .contact-container { text-align: right; }
+    .contact-info p, .opening-hours p, .social-container p { margin: 4px 0; }
+    .social-title { margin-bottom: 20px; display: block; }
+    .social-icons { margin-top: 20px; }
+    .social-icons a img { width: 30px; height: 30px; margin: 0 5px; vertical-align: middle; }
+    .contact-info a[href^="mailto"] { color: #fff; text-decoration: none; }
+    .contact-info a[href^="mailto"]:hover { text-decoration: underline; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 10px 0; margin: 0; }
+
+    /* * * * DECORAZIONI * * * */
+    /* 1. Sezioni alternate a righe tratteggiate */
+    .section-pattern{background:repeating-linear-gradient(135deg,#fafafa 0,#fafafa 20px,#f0f0f0 20px,#f0f0f0 40px);}
+    /* 2. Divider a onda SVG */
+    .divider-wave{position:relative;height:60px;overflow:hidden}
+    .divider-wave::before{content:"";position:absolute;top:-20px;width:200%;height:100px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path fill="%23f4f4f4" d="M0,0 C600,100 600,0 1200,100 L1200,0 L0,0 Z"/></svg>') no-repeat;background-size:50% 100px;transform:translateX(-50%);}
+    /* 3. Maschera diagonale */
+    .diagonal-bg{position:relative;background:#fff}
+    .diagonal-bg::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:#e8e8e8;clip-path:polygon(0 0,100% 10%,100% 100%,0% 90%);z-index:-1;}
+    /* 4. Overlay puntinato */
+    .dotted-overlay{position:relative}
+    .dotted-overlay::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(#ddd 1px,transparent 1px);background-size:5px 5px;opacity:.2;pointer-events:none;}
+    /* 5. Hero con immagine da Unsplash + overlay */
+    .hero{position:relative;background:url('https://source.unsplash.com/1600x900/?architecture') center/cover no-repeat;color:#fff}
+    .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4)}
+    /* 6. Titoli con parte verde e nera */
+    .custom-title { text-align: center; font-size: 2.4em; margin-bottom: 30px; font-weight: 700; color: #000; line-height: 1.2;}
+    .custom-title .green-part { color: #287233;}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="img/logo.png" alt="Logo"></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="section-pattern">
+  <h2 class="custom-title">
+    Lo Studio <span class="green-part">Tecnico Alessandro</span> Cerquaglia
+  </h2>
+  <img src="img/logo.jpg" alt="Logo Studio Tecnico Alessandro Cerquaglia" class="reduced-by-50" />
+  <p><strong>Lo Studio Tecnico del Geometra Alessandro Cerquaglia</strong>, con sede a Pantalla di Todi (PG), è una realtà professionale solida e aggiornata, che offre <strong>molto più della classica progettazione</strong>.</p>
+  <p>Ci occupiamo di <strong>progetti su misura</strong>, pensati caso per caso, grazie a un <strong>metodo di lavoro moderno e completo</strong>. Seguiamo il cliente in tutte le fasi, dallo studio iniziale fino alla consegna, garantendo <strong>chiarezza</strong>, <strong>controllo</strong> e <strong>qualità</strong>.</p>
+  <p>Ecco alcuni dei servizi che offriamo:</p>
+  <ul>
+    <li><strong>Assistenza nelle compravendite immobiliari</strong></li>
+    <li><strong>Certificazioni energetiche (APE)</strong></li>
+    <li><strong>Collaborazioni con professionisti e imprese</strong></li>
+    <li><strong>Consulenze tecniche specialistiche</strong></li>
+    <li><strong>Fotoinserimenti per pratiche e progetti</strong></li>
+    <li><strong>Pratiche edilizie e catastali</strong></li>
+    <li><strong>Realtà aumentata e virtual tour</strong></li>
+    <li><strong>Render fotorealistici</strong></li>
+    <li><strong>Ricostruzione post sisma 2016</strong></li>
+    <li><strong>Rilievi topografici e architettonici</strong></li>
+    <li><strong>Sicurezza nei cantieri (PSC, POS, CSP/CSE)</strong></li>
+    <li><strong>Gestione pratiche per Superbonus 110%</strong></li>
+  </ul>
+  <p>Gestiamo ogni pratica con <strong>precisione</strong> e <strong>rapidità</strong>, grazie alla nostra esperienza e alla conoscenza sempre aggiornata delle normative.</p>
+  <p>Il nostro metodo unisce <strong>tecnologie moderne</strong> e <strong>cura per i dettagli</strong>. Utilizziamo strumenti avanzati per offrire un servizio completo e chiaro:</p>
+  <ul>
+    <li><strong>Rilievi con drone</strong> per misurazioni accurate e veloci;</li>
+    <li><strong>Modelli 3D</strong> e <strong>render fotorealistici</strong> per farti vedere il progetto in anteprima;</li>
+    <li><strong>Realtà aumentata</strong> e <strong>Realtà mista</strong> per esplorare lo spazio ancora prima che esista;</li>
+  </ul>
+  <p>Ogni lavoro è studiato <strong>su misura</strong>, per rispondere davvero alle esigenze di chi si affida a noi. Evitiamo soluzioni standard e puntiamo sempre sulla <strong>personalizzazione</strong>.</p>
+  <p>Lavoriamo con un team di <strong>professionisti qualificati</strong> e una rete selezionata di <strong>artigiani e specialisti</strong>, per garantire risultati di alto livello sotto ogni aspetto: tecnico, estetico e funzionale.</p>
+  <p>In ogni progetto mettiamo tre elementi fondamentali:</p>
+  <ul>
+    <li><strong>Professionalità</strong>: metodo preciso e rispetto delle regole;</li>
+    <li><strong>Innovazione</strong>: uso delle migliori tecnologie per semplificare e migliorare il lavoro;</li>
+    <li><strong>Personalizzazione</strong>: ogni progetto è unico, costruito in base alle esigenze, al budget e allo stile del cliente.</li>
+  </ul>
+  <p>Scegliere lo Studio Tecnico Alessandro Cerquaglia significa affidarsi a un partner serio e disponibile, che ascolta le tue esigenze e ti accompagna passo dopo passo fino al risultato finale.</p>
+  <p>Contattateci per una consulenza preliminare: metteremo a disposizione competenze, strumenti e passione per realizzare progetti che rispondano pienamente alle vostre aspettative.</p>
+</section>
+
+<section class="diagonal-bg">
+  <h2 class="custom-title">
+    Il nostro<span class="green-part"> Team</span>
+  </h2>
+    <div class="team-container">
+      <div class="team-member">
+          <img src="img/geometra1.jpg" alt="Geom. Alessandro Cerquaglia">
+          <h3>Geom. Alessandro Cerquaglia</h3>
+      </div>
+      <div class="team-member">
+          <img src="img/geometra2.jpg" alt="Geom. Michele Bertini">
+          <h3>Geom. Michele Bertini</h3>
+      </div>
+      <div class="team-member">
+          <img src="img/geometra3.jpg" alt="Geom. Riccardo Monelli">
+          <h3>Stagista Riccardo</h3>
+      </div>
+    </div>
+</section>
+
+<section class="section-pattern">
+  <h2 class="custom-title">
+    La nostra missione <span class="green-part">e Valori distintivi</span>
+  </h2>
+  <img src="img/lavoro.jpg" alt="Missione dello studio tecnico" class="reduced-by-50" />
+  <p>
+  Al centro del nostro lavoro ci sono la <strong>competenza tecnica</strong>, l’<strong>aggiornamento continuo</strong> e un <strong>rapporto di fiducia</strong> con ogni cliente. Seguiamo ogni progetto con <strong>precisione</strong>, <strong>passione</strong> e <strong>spirito di collaborazione</strong>, con l’obiettivo di costruire relazioni solide e durature, basate su risultati concreti.
+</p>
+
+<ul>
+  <li>
+    <strong>Visione di lungo termine:</strong> progettiamo pensando al futuro, per creare soluzioni che possano adattarsi nel tempo e durare, offrendo <strong>flessibilità</strong> e <strong>valore</strong>.
+  </li>
+  <li>
+    <strong>Approccio su misura:</strong> ogni progetto è personalizzato sulle esigenze del cliente e del contesto, evitando soluzioni standard.
+  </li>
+  <li>
+    <strong>Innovazione continua:</strong> usiamo strumenti moderni come <strong>droni per rilievi</strong>, <strong>modellazione 3D</strong>, <strong>realtà aumentata</strong> e <strong>gestione digitale del cantiere</strong> per essere più precisi, rapidi ed efficienti.
+  </li>
+  <li>
+    <strong>Sostenibilità e rispetto del contesto:</strong> puntiamo su <strong>efficienza energetica</strong>, <strong>materiali compatibili</strong> e integrazione con l’ambiente circostante.
+  </li>
+  <li>
+    <strong>Affidabilità e rigore normativo:</strong> assicuriamo una <strong>gestione chiara</strong> delle pratiche, sempre nel rispetto delle norme, con attenzione a tempi, costi e trasparenza.
+  </li>
+  <li>
+    <strong>Collaborazione continua:</strong> manteniamo un <strong>dialogo aperto</strong> con clienti e partner, offrendo assistenza completa in tutte le fasi del progetto.
+  </li>
+  <li>
+    <strong>Formazione costante:</strong> investiamo nella <strong>crescita professionale</strong> del team e collaboriamo con <strong>artigiani e tecnici specializzati</strong> per garantire qualità e innovazione.
+  </li>
+</ul>
+
+
+<div class="separator-wave"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C400,-40 800,160 1200,60 L1200,0 L0,0 Z" fill="#f4f4f4"/></svg></div>
+
+<footer>
+  <div class="footer-wrapper">
+    <!-- SOCIAL -->
+    <div class="social-container">
+      <h4>Seguici Sui nostri Social</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/geometra.alessandro.cerquaglia"><img src="img/facebook.png" alt="Facebook"></a>
+        <a href="https://wa.me/+393393737444"><img src="img/whatsapp.png" alt="Whatsapp"></a>
+        <a href="https://www.instagram.com/cerquagliaalessandro?utm_source=ig_web_button_share_sheet&igsh=MWJwbDU1Nm80ZWFqMQ=="><img src="img/instagram.png" alt="Instagram"></a>
+      </div>
+      <p class="piva">P.IVA 02990980548</p>
+    </div>
+
+    <!-- ORARI -->
+    <div class="hours-container">
+      <h4>Orari di apertura</h4>
+      <div class="opening-hours">
+        <p>Lunedì – Venerdì: 9:00 – 13:00 / 15:00 – 19:00</p>
+        <p>Sabato e Domenica: Chiuso</p>
+      </div>
+      <p class="indirizzo">Sede: Via Piana 250/B, Pantalla di Todi (PG)</p>
+    </div>
+
+    <!-- CONTATTI -->
+    <div class="contact-container">
+      <h4>Contatti</h4>
+      <div class="contact-info">
+        <p>Tel: +39 075 465 8020</p>
+        <p>Cell: +39 339 373 7444</p>
+        <p>Email: <a href="mailto:info@studiocerquaglia.it">alessandro.cerquaglia@geometri.pg.it</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Studio Tecnico Alessandro Cerquaglia. <p>&copy; 2025 Studio Tecnico Alessandro Cerquaglia. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy & Cookie Policy</a></p></p>
+  </div>
+</footer>
+</body>
+</html>
