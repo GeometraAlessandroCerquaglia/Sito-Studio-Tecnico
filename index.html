@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio Tecnico Alessandro Cerquaglia</title>
+  <style>
+    /* * * * BASE * * * */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; color: #000; line-height: 1.6; }
+
+    /* * * * HEADER * * * */
+    header { background: linear-gradient(to right, #000, #222); color: #fff; display: flex; align-items: center; padding: 10px 20px; flex-wrap: wrap; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); }
+    .logo img { height: 80px; }
+    nav { margin-left: auto; }
+    nav ul { list-style: none; display: flex; gap: 15px; }
+    nav a { text-decoration: none; color: #fff; font-weight: 600; padding: 8px 12px; border-radius: 5px; transition: background 0.3s; }
+    nav a:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* * * * HERO * * * */
+    .hero { background: linear-gradient(to right, #ffffff, #e6e6e6); text-align: center; padding: 60px 20px; border-bottom: 3px solid #ccc; }
+    .hero h1 { font-size: 2.5em; color: #000; margin-bottom: 15px; }
+    .hero p { font-size: 1.2em; color: #444; max-width: 800px; margin: 0 auto; text-align: justify; }
+
+    /* * * * SLIDER * * * */
+    .slider-section { overflow: hidden; margin: 50px 0; padding: 40px 0; background: linear-gradient(to right, #e0e0e0, #f5f5f5); }
+    .slider-track { display: flex; width: max-content; animation: scrollSlider 40s linear infinite; gap: 10px; }
+    .slider-track img { width: 250px; height: 125px; object-fit: cover; border-radius: 8px; border: 2px solid #ccc; }
+    @keyframes scrollSlider { 0% { transform: translateX(0); } 100% { transform: translateX(-4740px); } }
+    .slider-section:hover .slider-track { animation-play-state: paused; }
+
+    /* * * * SERVICES * * * */
+   .services-wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px; font-family: "Segoe UI", sans-serif; color: #333; background-color: #f8f6f4; }
+   .services-title { text-align: center; font-size: 2em; margin-bottom: 10px; }
+   .services-title .highlight { color: #287233; }
+   .services-subtitle { text-align: center; font-size: 1em; margin-bottom: 40px; }
+   .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+   .service-box { border: 1px solid #ccc; border-radius: 8px; background: #fff; padding: 25px; text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+   .service-box:hover { transform: translateY(-5px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+   .service-box h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.1em; color: #333; }
+    @media (max-width: 1024px) { .services { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .services { grid-template-columns: 1fr; } }
+
+    
+    /* * * * TIMELINE / PHASES * * */
+    .timeline-wrapper{position:relative;max-width:800px;margin:80px auto;padding:0 20px}
+    .timeline-line{position:absolute;left:30px;top:0;width:4px;height:100%;background:#e0e0e0;overflow:hidden}
+    .timeline-fill{position:absolute;left:0;top:0;width:100%;height:0;background:#287233;transition:height .2s ease-out}
+    .timeline-step{position:relative;margin-left:70px;margin-bottom:60px;opacity:0;transform:translateY(30px);transition:opacity .6s ease-out,transform .6s ease-out}
+    .timeline-icon{position:absolute;left:-48px;top:0;width:40px;height:40px;background:#fff;border:3px solid #287233;color:#28a745;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.1em;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+    .timeline-box{background:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.08);padding:20px 25px;line-height:1.6}
+    .timeline-box h3{margin:0 0 12px;color:#287233;font-size:18px;display:inline-block}
+    .timeline-box p{margin:6px 0;font-size:15px}
+    .timeline-wrapper.visible .timeline-step{opacity:1;transform:translateY(0)}
+    @media(max-width:768px){.timeline-line{left:20px}.timeline-step{margin-left:60px}.timeline-icon{left:-52px}}
+
+
+    /* * * * FAQ * * * */
+    .faq-section { padding: 80px 20px; max-width: 1200px; margin: auto; display: flex; gap: 40px; align-items: flex-start; }
+    .faq-image { flex: 0 0 40%; }
+    .faq-image img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .faq-container { flex: 1; }
+    .faq-title { font-size: 32px;font-weight: 700;margin-bottom: 30px;text-align: center; }
+    .faq-title .green { color: #287233; }
+    .faq-title .black {color: #000; }
+    .faq-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .faq-item { background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; width: 100%; background: none; border: none; padding: 18px 20px; font-size: 17px; font-weight: 600; color: #222; cursor: pointer; }
+    .faq-question:hover { color: #287233; }
+    .faq-question:hover .faq-icon { color: #287233; }
+    .faq-icon { font-size: 20px; font-weight: bold; transition: transform 0.3s; }
+    .faq-answer { display: none; padding: 0 20px 18px 20px; font-size: 15px; color: #444; line-height: 1.5; }
+    .faq-item.open .faq-answer { display: block; animation: fadeIn 0.3s ease-in-out; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @media (max-width: 992px) { .faq-section { flex-direction: column; } .faq-columns { grid-template-columns: 1fr; } }
+
+    /* * * * FOOTER * * * */
+    footer { background-color: #111; color: #fff; font-size: 14px; margin-bottom: 0; }
+    .footer-wrapper { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; flex-wrap: wrap; }
+    .social-container, .hours-container, .contact-container { flex: 1; min-width: 150px; }
+    .social-container { text-align: left; }
+    .hours-container { text-align: center; }
+    .contact-container { text-align: right; }
+    .contact-info p, .opening-hours p, .social-container p { margin: 4px 0; }
+    .social-title { margin-bottom: 20px; display: block; }
+    .social-icons { margin-top: 20px; }
+    .social-icons a img { width: 30px; height: 30px; margin: 0 5px; vertical-align: middle; }
+    .contact-info a[href^="mailto"] { color: #fff; text-decoration: none; }
+    .contact-info a[href^="mailto"]:hover { text-decoration: underline; }
+    .footer-bottom { border-top: 1px solid #333; text-align: center; padding: 10px 0; margin: 0; }
+
+    /* * * * DECORAZIONI * * * */
+    /* 1. Sezioni alternate a righe tratteggiate */
+    .section-pattern{background:repeating-linear-gradient(135deg,#fafafa 0,#fafafa 20px,#f0f0f0 20px,#f0f0f0 40px);}
+    /* 2. Divider a onda SVG */
+    .divider-wave{position:relative;height:60px;overflow:hidden}
+    .divider-wave::before{content:"";position:absolute;top:-20px;width:200%;height:100px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 100"><path fill="%23f4f4f4" d="M0,0 C600,100 600,0 1200,100 L1200,0 L0,0 Z"/></svg>') no-repeat;background-size:50% 100px;transform:translateX(-50%);}
+    /* 3. Maschera diagonale */
+    .diagonal-bg{position:relative;background:#fff}
+    .diagonal-bg::before{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:#e8e8e8;clip-path:polygon(0 0,100% 10%,100% 100%,0% 90%);z-index:-1;}
+    /* 4. Overlay puntinato */
+    .dotted-overlay{position:relative}
+    .dotted-overlay::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(#ddd 1px,transparent 1px);background-size:5px 5px;opacity:.2;pointer-events:none;}
+    /* 5. Hero con immagine da Unsplash + overlay */
+    .hero{position:relative;background:url('https://source.unsplash.com/1600x900/?architecture') center/cover no-repeat;color:#fff}
+    .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4)}
+    /* 6. Titoli con parte verde e nera */
+    .custom-title { text-align: center; font-size: 2.4em; margin-bottom: 30px; font-weight: 700; color: #000; line-height: 1.2;}
+    .custom-title .green-part { color: #287233;}
+  </style>
+</head>
+<body>
+  
+<div id="cookie-banner" style="position:fixed;bottom:0;left:0;width:100%;background:#222;color:#fff;padding:15px;text-align:center;z-index:9999;">
+  Questo sito utilizza cookie tecnici e, previo consenso, cookie analitici. 
+  <button id="accept-cookies" style="margin-left:10px;padding:5px 10px;border:none;background:#287233;color:#fff;cursor:pointer;">Accetta</button>
+</div>
+
+<script>
+  const banner = document.getElementById('cookie-banner');
+  const btn = document.getElementById('accept-cookies');
+
+  if(!localStorage.getItem('cookiesAccepted')){
+    banner.style.display = 'block';
+  } else {
+    banner.style.display = 'none';
+  }
+
+  btn.addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'true');
+    banner.style.display = 'none';
+  });
+</script>
+
+<header>
+  <div class="logo"><img src="img/logo.png" alt="Logo"></div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </li>
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contatti.html">Contatti</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2 class="custom-title">Benvenuti nel <span class="green-part">nostro Studio Tecnico</span></h2>
+</section>
+
+<div class="divider-wave"></div>
+
+<section class="slider-section diagonal-bg">
+  
+  <div class="slider-track">
+   <img src="img/slide.jpg" alt="Slide">
+   <img src="img/slide1.jpg" alt="Slide 1">
+   <img src="img/slide2.jpg" alt="Slide 2">
+   <img src="img/slide3.jpg" alt="Slide 3">
+   <img src="img/slide4.jpg" alt="Slide 4">
+   <img src="img/slide5.jpg" alt="Slide 5">
+   <img src="img/slide6.jpg" alt="Slide 6">
+   <img src="img/slide7.jpg" alt="Slide 7">
+   <img src="img/slide8.jpg" alt="Slide 8">
+   <img src="img/slide9.jpg" alt="Slide 9">
+   <img src="img/slide10.jpg" alt="Slide 10">
+   <img src="img/slide11.jpg" alt="Slide 11">
+   <img src="img/slide12.jpg" alt="Slide 12">
+   <img src="img/slide13.jpg" alt="Slide 13">
+   <img src="img/slide14.jpg" alt="Slide 14">
+   <img src="img/slide15.jpg" alt="Slide 15">
+   <img src="img/slide16.jpg" alt="Slide 16">
+   <img src="img/slide17.jpg" alt="Slide 17">
+   <img src="img/slide18.jpg" alt="Slide 18">
+
+   <!-- Duplicati per effetto loop -->
+   <img src="img/slide.jpg" alt="Slide">
+   <img src="img/slide1.jpg" alt="Slide 1">
+   <img src="img/slide2.jpg" alt="Slide 2">
+   <img src="img/slide3.jpg" alt="Slide 3">
+   <img src="img/slide4.jpg" alt="Slide 4">
+   <img src="img/slide5.jpg" alt="Slide 5">
+   <img src="img/slide6.jpg" alt="Slide 6">
+   <img src="img/slide7.jpg" alt="Slide 7">
+   <img src="img/slide8.jpg" alt="Slide 8">
+   <img src="img/slide9.jpg" alt="Slide 9">
+   <img src="img/slide10.jpg" alt="Slide 10">
+   <img src="img/slide11.jpg" alt="Slide 11">
+   <img src="img/slide12.jpg" alt="Slide 12">
+   <img src="img/slide13.jpg" alt="Slide 13">
+   <img src="img/slide14.jpg" alt="Slide 14">
+   <img src="img/slide15.jpg" alt="Slide 15">
+   <img src="img/slide16.jpg" alt="Slide 16">
+   <img src="img/slide17.jpg" alt="Slide 17">
+   <img src="img/slide18.jpg" alt="Slide 18">
+  </div>
+</section>
+
+<section class="services-wrapper diagonal-bg dotted-overlay">
+  <h2 class="custom-title">Come <span class="green-part">Lavoriamo</span></h2>
+  <p class="services-subtitle">
+    <strong>Il nostro Studio Tecnico</strong> si occupa di <strong>ogni singola fase del progetto</strong>, dal primo schizzo alla consegna finale!
+  </p>
+
+  <div class="services">
+    <div class="service-box">
+      <h3>Interior Design</h3>
+      <p>I render fotorealistici interni ed esterni sono il nostro motore creativo: ti permettono di visualizzare in anteprima come sarà la tua casa, ancora prima che inizi la realizzazione.</p></p>
+    </div>
+
+    <div class="service-box">
+      <h3>Servizio Completo</h3>
+      <p>Per garantire ai nostri clienti la massima tranquillità e semplicità.</p>
+    </div>
+
+    <div class="service-box">
+      <h3>Consegna Rapida</h3>
+      <p>Grazie alla nostra esperienza e alla rete di fornitori e professionisti con cui collaboriamo.</p>
+    </div>
+
+    <div class="service-box">
+      <h3>Pratiche Edilizie e Normative</h3>
+      <p>Prima di intraprendere qualsiasi progetto, verifichiamo accuratamente la situazione normativa, catastale e urbanistica dell'immobile.</p>
+    </div>
+
+    <div class="service-box">
+      <h3>Sopralluogo e Preventivo Gratuiti</h3>
+      <p>Questo ci permette di avere una visione chiara e precisa del progetto prima di iniziare.</p>
+    </div>
+
+    <div class="service-box">
+      <h3>Servizi Personalizzati</h3>
+      <p>Il nostro approccio si basa su una progettazione completa.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slider-section">
+  <div class="slider-track">
+   <img src="img/slide19.jpg" alt="Slide 19">
+   <img src="img/slide20.jpg" alt="Slide 20">
+   <img src="img/slide21.jpg" alt="Slide 21">
+   <img src="img/slide22.jpg" alt="Slide 22">
+   <img src="img/slide23.jpg" alt="Slide 23">
+   <img src="img/slide24.jpg" alt="Slide 24">
+   <img src="img/slide25.jpg" alt="Slide 25">
+   <img src="img/slide26.jpg" alt="Slide 26">
+   <img src="img/slide27.jpg" alt="Slide 27">
+   <img src="img/slide28.jpg" alt="Slide 28">
+   <img src="img/slide29.jpg" alt="Slide 29">
+   <img src="img/slide30.jpg" alt="Slide 30">
+   <img src="img/slide31.jpg" alt="Slide 31">
+   <img src="img/slide32.jpg" alt="Slide 32">
+   <img src="img/slide33.jpg" alt="Slide 33">
+   <img src="img/slide34.jpg" alt="Slide 34">
+   <img src="img/slide35.jpg" alt="Slide 35">
+   <img src="img/slide36.jpg" alt="Slide 36">
+
+   <!-- Duplicati per effetto loop -->
+   <img src="img/slide19.jpg" alt="Slide 19">
+   <img src="img/slide20.jpg" alt="Slide 20">
+   <img src="img/slide21.jpg" alt="Slide 21">
+   <img src="img/slide22.jpg" alt="Slide 22">
+   <img src="img/slide23.jpg" alt="Slide 23">
+   <img src="img/slide24.jpg" alt="Slide 24">
+   <img src="img/slide25.jpg" alt="Slide 25">
+   <img src="img/slide26.jpg" alt="Slide 26">
+   <img src="img/slide27.jpg" alt="Slide 27">
+   <img src="img/slide28.jpg" alt="Slide 28">
+   <img src="img/slide29.jpg" alt="Slide 29">
+   <img src="img/slide30.jpg" alt="Slide 30">
+   <img src="img/slide31.jpg" alt="Slide 31">
+   <img src="img/slide32.jpg" alt="Slide 32">
+   <img src="img/slide33.jpg" alt="Slide 33">
+   <img src="img/slide34.jpg" alt="Slide 34">
+   <img src="img/slide35.jpg" alt="Slide 35">
+   <img src="img/slide36.jpg" alt="Slide 36">
+  </div>
+</section>
+
+<section class="timeline-wrapper">
+  <div class="timeline-line">
+    <div class="timeline-fill"></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="timeline-step">
+    <div class="timeline-icon">1</div>
+    <div class="timeline-box">
+      <h3>Fase Preliminare</h3>
+      <p><strong>1.</strong> Sopralluogo e rilievo</p>
+      <p><strong>2.</strong> Progetto preliminare</p>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="timeline-step">
+    <div class="timeline-icon">2</div>
+    <div class="timeline-box">
+      <h3>Sopralluogo</h3>
+      <p><strong>1.</strong> Capitolato lavori</p>
+      <p><strong>3.</strong> Studio preventivi</p>
+      <p><strong>4.</strong> Progetto esecutivo</p>
+      <p><strong>5.</strong> Disegni esecutivi con Fotoinserimenti e Render</p>
+      <p><strong>6.</strong> Incontro con cliente</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="timeline-step">
+    <div class="timeline-icon">3</div>
+    <div class="timeline-box">
+      <h3>Inizio Lavori</h3>
+      <p><strong>1.</strong> Pratica edilizia</p>
+      <p><strong>2.</strong> Inizio lavori</p>
+      <p><strong>4.</strong> Direzione lavori</p>
+      <p><strong>5.</strong> fine lavori</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const wrapper = document.querySelector('.timeline-wrapper');
+    const fill = document.querySelector('.timeline-fill');
+    if (!wrapper || !fill) return;
+
+    const rect = wrapper.getBoundingClientRect();
+    const windowH = window.innerHeight;
+    const totalHeight = wrapper.offsetHeight;
+
+    if (rect.top < windowH * 0.9) wrapper.classList.add('visible');
+
+    const scrollStart = windowH - rect.top;
+    const scrolled = Math.min(Math.max(scrollStart, 0), totalHeight);
+    fill.style.height = scrolled + 'px';
+  });
+</script>
+
+<div class="separator-wave"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,0 C400,100 800,-100 1200,0 L1200,60 L0,60 Z" fill="#f4f4f4"/></svg></div>
+
+<section class="section-pattern">
+<section class="faq-section">
+  <div class="faq-image">
+    <img src="img/faq.jpg" alt="Domande Frequenti" />
+  </div>
+  <div class="faq-container">
+    <h2 class="faq-title"><span class="black"></span>Domande </span><span class="green"></span>Frequenti</span></h2>
+    <div class="faq-columns">
+
+      <!-- Colonna 1 -->
+      <div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Di cosa si occupa il vostro studio tecnico?</span><span class="faq-icon">+</span></button><div class="faq-answer">Lo studio offre servizi di progettazione, pratiche edilizie e catastali, consulenza tecnica e direzione lavori.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>È possibile richiedere un preventivo online?</span><span class="faq-icon">+</span></button><div class="faq-answer">Sì, è sufficiente compilare il modulo nella sezione “Contatti” del nostro sito specificando la richiesta.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Offrite servizi per ristrutturazioni?</span><span class="faq-icon">+</span></button><div class="faq-answer">Certamente. Ci occupiamo di tutte le fasi: progettazione, autorizzazioni, direzione lavori e sicurezza.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Potete seguire anche piccoli interventi?</span><span class="faq-icon">+</span></button><div class="faq-answer">Sì, gestiamo anche pratiche per manutenzioni, aggiornamenti catastali, sanatorie e modifiche interne.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Fornite rendering e modelli 3D?</span><span class="faq-icon">+</span></button><div class="faq-answer">Sì, realizziamo elaborati grafici realistici utili a visualizzare il progetto prima della sua realizzazione.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Effettuate rilievi topografici?</span><span class="faq-icon">+</span></button><div class="faq-answer">Sì, eseguiamo rilievi topografici, catastali e plano-altimetrici con strumentazione avanzata.</div></div>
+      </div>
+
+      <!-- Colonna 2 -->
+      <div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Gestite le pratiche per i bonus edilizi?</span><span class="faq-icon">+</span></button><div class="faq-answer">Assolutamente. Offriamo assistenza tecnica per Ecobonus, Bonus Ristrutturazioni, Superbonus e simili.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Vi occupate della sicurezza nei cantieri?</span><span class="faq-icon">+</span></button><div class="faq-answer">Sì, redigiamo PSC, POS e assumiamo l’incarico di Coordinatore per la Sicurezza in fase di progettazione ed esecuzione.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Serve un appuntamento per venire in studio?</span><span class="faq-icon">+</span></button><div class="faq-answer">Consigliamo sempre di fissare un appuntamento per potervi dedicare la giusta attenzione.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Posso richiedere consulenze da remoto?</span><span class="faq-icon">+</span></button><div class="faq-answer">Sì, organizziamo consulenze anche tramite videochiamata o telefono, previo appuntamento.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Offrite accatastamenti e volture?</span><span class="faq-icon">+</span></button><div class="faq-answer">Sì, eseguiamo accatastamenti, volture catastali, frazionamenti e variazioni planimetriche.</div></div>
+        <div class="faq-item"><button type="button" class="faq-question"><span>Lo studio supporta nella compravendita?</span><span class="faq-icon">+</span></button><div class="faq-answer">Effettuiamo verifiche tecniche, controlli di conformità e assistenza durante l’intero processo di compravendita.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="separator-wave"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,60 C400,-40 800,160 1200,60 L1200,0 L0,0 Z" fill="#f4f4f4"/></svg></div>
+
+<footer>
+  <div class="footer-wrapper">
+    <!-- SOCIAL -->
+    <div class="social-container">
+      <h4>Seguici Sui nostri Social</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/geometra.alessandro.cerquaglia"><img src="img/facebook.png" alt="Facebook"></a>
+        <a href="https://wa.me/+393393737444"><img src="img/whatsapp.png" alt="Whatsapp"></a>
+        <a href="https://www.instagram.com/cerquagliaalessandro?utm_source=ig_web_button_share_sheet&igsh=MWJwbDU1Nm80ZWFqMQ=="><img src="img/instagram.png" alt="Instagram"></a>
+      </div>
+      <p class="piva">P.IVA 02990980548</p>
+    </div>
+
+    <!-- ORARI -->
+    <div class="hours-container">
+      <h4>Orari di apertura</h4>
+      <div class="opening-hours">
+        <p>Lunedì – Venerdì: 9:00 – 13:00 / 15:00 – 19:00</p>
+        <p>Sabato e Domenica: Chiuso</p>
+      </div>
+      <p class="indirizzo">Sede: Via Piana 250/B, Pantalla di Todi (PG)</p>
+    </div>
+
+    <!-- CONTATTI -->
+    <div class="contact-container">
+      <h4>Contatti</h4>
+      <div class="contact-info">
+        <p>Tel: +39 075 465 8020</p>
+        <p>Cell: +39 339 373 7444</p>
+        <p>Email: <a href="mailto:info@studiocerquaglia.it">alessandro.cerquaglia@geometri.pg.it</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Studio Tecnico Alessandro Cerquaglia. <p>&copy; 2025 Studio Tecnico Alessandro Cerquaglia. <a href="privacy.html" style="color:#fff;text-decoration:underline;">Privacy & Cookie Policy</a></p></p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const question = item.querySelector('.faq-question');
+      const icon = item.querySelector('.faq-icon');
+      question.addEventListener('click', () => {
+        item.classList.toggle('open');
+        icon.textContent = item.classList.contains('open') ? '−' : '+';
+      });
+    });
+  });
+</script>
+</body>
+</html>
